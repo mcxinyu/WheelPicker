@@ -24,10 +24,11 @@ import java.util.*
  *
  * @author zyyoona7
  */
-class DatePickerHelper(private var wheelYearView: WheelYearView?,
-                       private var wheelMonthView: WheelMonthView?,
-                       private var wheelDayView: WheelDayView?)
-    : OnItemSelectedListener, OnScrollChangedListener, DatePicker, WheelPicker {
+class DatePickerHelper(
+    private var wheelYearView: WheelYearView?,
+    private var wheelMonthView: WheelMonthView?,
+    private var wheelDayView: WheelDayView?
+) : OnItemSelectedListener, OnScrollChangedListener, DatePicker, WheelPicker {
 
     private var minYear: Int = -1
     private var maxYear: Int = -1
@@ -94,7 +95,7 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
             }
             monthId -> {
                 wheelDayView?.month = wheelMonthView?.getItem(position)
-                        ?: DEFAULT_MONTH
+                    ?: DEFAULT_MONTH
                 val selectedYear = getSelectedYear()
                 val selectedMonth = wheelMonthView?.getItem(position) ?: DEFAULT_MONTH
                 //如果选中的年份是最小选中年或者最大选中年 并且 选中的月份是最小选中月或者最大选中月-
@@ -112,8 +113,10 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
             else -> {
             }
         }
-        dateSelectedListener?.onDateSelected(getSelectedYear(), getSelectedMonth(),
-                getSelectedDay(), getSelectedDate())
+        dateSelectedListener?.onDateSelected(
+            getSelectedYear(), getSelectedMonth(),
+            getSelectedDay(), getSelectedDate()
+        )
     }
 
     override fun onScrollChanged(wheelView: WheelView, scrollOffsetY: Int) {
@@ -155,15 +158,17 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
     }
 
     override fun setSelectedDate(calendar: Calendar) {
-        setSelectedDate(calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH) + 1,
-                calendar.get(Calendar.DAY_OF_MONTH))
+        setSelectedDate(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
     }
 
     override fun setSelectedDate(year: Int, month: Int, day: Int) {
-        wheelYearView?.setSelectedYear(year)
-        wheelMonthView?.setSelectedMonth(month)
-        wheelDayView?.setSelectedDay(day)
+        wheelYearView?.setSelectedYear(year, true)
+        wheelMonthView?.setSelectedMonth(month, true)
+        wheelDayView?.setSelectedDay(day, true)
     }
 
     override fun setMaxSelectedDate(maxDate: Date) {
@@ -213,8 +218,10 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
         setDateRange(minCalendar, maxCalendar, WheelView.OverRangeMode.NORMAL)
     }
 
-    override fun setDateRange(minCalendar: Calendar, maxCalendar: Calendar,
-                              overRangeMode: WheelView.OverRangeMode) {
+    override fun setDateRange(
+        minCalendar: Calendar, maxCalendar: Calendar,
+        overRangeMode: WheelView.OverRangeMode
+    ) {
         minYear = minCalendar.get(Calendar.YEAR)
         maxYear = maxCalendar.get(Calendar.YEAR)
         minMonth = minCalendar.get(Calendar.MONTH) + 1
@@ -229,7 +236,7 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
         val format = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
         return try {
             format.parse(getSelectedDateStr())
-                    ?: Date()
+                ?: Date()
         } catch (e: ParseException) {
             Date()
         }
@@ -263,9 +270,11 @@ class DatePickerHelper(private var wheelYearView: WheelYearView?,
         setMaxTextWidthMeasureType(measureType, measureType, measureType)
     }
 
-    override fun setMaxTextWidthMeasureType(yearType: WheelView.MeasureType,
-                                            monthType: WheelView.MeasureType,
-                                            dayType: WheelView.MeasureType) {
+    override fun setMaxTextWidthMeasureType(
+        yearType: WheelView.MeasureType,
+        monthType: WheelView.MeasureType,
+        dayType: WheelView.MeasureType
+    ) {
         setYearMaxTextWidthMeasureType(yearType)
         setMonthMaxTextWidthMeasureType(monthType)
         setDayMaxTextWidthMeasureType(dayType)

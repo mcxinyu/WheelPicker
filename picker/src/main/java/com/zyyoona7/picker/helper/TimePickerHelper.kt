@@ -137,9 +137,9 @@ class TimePickerHelper(private var wheelAmPmView: WheelAmPmView?,
         if (!is24Hour) {
             set24Hour(true)
         }
-        wheelHourView?.setSelectedHour(hour)
-        wheelMinuteView?.setSelectedMinute(minute)
-        wheelSecondView?.setSelectedSecond(second)
+        wheelHourView?.setSelectedHour(hour, true)
+        wheelMinuteView?.setSelectedMinute(minute, true)
+        wheelSecondView?.setSelectedSecond(second, true)
     }
 
     override fun setTimeFor12(hour: Int, minute: Int, second: Int, isAm: Boolean) {
@@ -147,10 +147,10 @@ class TimePickerHelper(private var wheelAmPmView: WheelAmPmView?,
         if (is24Hour) {
             set24Hour(false)
         }
-        wheelAmPmView?.setSelectedPosition(if (isAm) 0 else 1)
-        wheelHourView?.setSelectedHour(hour)
-        wheelMinuteView?.setSelectedMinute(minute)
-        wheelSecondView?.setSelectedSecond(second)
+        wheelAmPmView?.setSelectedPosition(if (isAm) 0 else 1, true)
+        wheelHourView?.setSelectedHour(hour, true)
+        wheelMinuteView?.setSelectedMinute(minute, true)
+        wheelSecondView?.setSelectedSecond(second, true)
     }
 
     override fun setShowHour(isShow: Boolean) {
